@@ -113,7 +113,7 @@ print(pyautogui.position())
 ## ▶️ 6. Executar a API
 
 ```bash
-uvicorn main:app --reload
+python -m uvicorn main:app --reload
 ```
 
 ---

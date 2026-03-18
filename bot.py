@@ -98,9 +98,9 @@ def esperar_e_mover_xml(destino, timeout=30):
 def rodar_bot(chaves, pasta_destino):
     print("🚀 Iniciando (modo coordenadas)")
 
-    INPUT_X, INPUT_Y = -1446, 398
-    BUSCAR_X, BUSCAR_Y = -1063, 408
-    XML_X, XML_Y = -1184, 380
+    INPUT_X, INPUT_Y = 434, 405
+    BUSCAR_X, BUSCAR_Y = 870, 395
+    XML_X, XML_Y = 646, 369
     qtd_sucesso = 0
     qtd_erro = 0
     chaves_erro = []
@@ -121,7 +121,7 @@ def rodar_bot(chaves, pasta_destino):
 
             mover_e_clicar(BUSCAR_X, BUSCAR_Y)
 
-            time.sleep(2)
+            time.sleep(5)
 
             mover_e_clicar(XML_X, XML_Y)
             pyautogui.press("enter")
