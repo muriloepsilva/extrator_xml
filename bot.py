@@ -58,41 +58,36 @@ def esperar_e_mover_xml(destino, timeout=30):
     downloads = str(Path.home() / "Downloads")
     inicio = time.time()
 
-    arquivos_antes = set(os.listdir(downloads))
-
     while True:
-        arquivos_agora = set(os.listdir(downloads))
-        novos = arquivos_agora - arquivos_antes
-
-        # pega apenas XML novo
-        xmls = [f for f in novos if f.endswith(".xml")]
-
-        if xmls:
-            for arquivo in xmls:
+        for arquivo in os.listdir(downloads):
+            if arquivo.endswith(".xml"):
                 origem = os.path.join(downloads, arquivo)
                 destino_final = os.path.join(destino, arquivo)
 
-                # espera terminar download real
-                while True:
-                    try:
-                        with open(origem, "rb"):
-                            break
-                    except:
-                        time.sleep(0.5)
+                # garante que terminou de escrever
+                try:
+                    tamanho1 = os.path.getsize(origem)
+                    time.sleep(0.5)
+                    tamanho2 = os.path.getsize(origem)
+
+                    if tamanho1 != tamanho2:
+                        continue  # ainda está baixando
+                except:
+                    continue
 
                 try:
                     shutil.move(origem, destino_final)
                     print(f"📁 Movido: {arquivo}")
+                    return True
                 except Exception as e:
                     print(f"Erro ao mover: {e}")
-
-            return True
+                    return False
 
         if time.time() - inicio > timeout:
             print("⚠️ Timeout esperando XML")
             return False
 
-        time.sleep(1)
+        time.sleep(0.5)
 
 
 def rodar_bot(chaves, pasta_destino):
