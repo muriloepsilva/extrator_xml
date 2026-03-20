@@ -52,8 +52,6 @@ def criar_pasta_downloads(nome_pasta):
     os.makedirs(caminho, exist_ok=True)
     return caminho
 
-
-# 🔥 NOVA FUNÇÃO (corrigida de verdade)
 def esperar_e_mover_xml(destino, timeout=30):
     downloads = str(Path.home() / "Downloads")
     inicio = time.time()
@@ -62,16 +60,17 @@ def esperar_e_mover_xml(destino, timeout=30):
         for arquivo in os.listdir(downloads):
             if arquivo.endswith(".xml"):
                 origem = os.path.join(downloads, arquivo)
+                print(origem)
                 destino_final = os.path.join(destino, arquivo)
+                print(destino_final)
 
-                # garante que terminou de escrever
                 try:
                     tamanho1 = os.path.getsize(origem)
                     time.sleep(0.5)
                     tamanho2 = os.path.getsize(origem)
 
                     if tamanho1 != tamanho2:
-                        continue  # ainda está baixando
+                        continue
                 except:
                     continue
 
@@ -93,9 +92,9 @@ def esperar_e_mover_xml(destino, timeout=30):
 def rodar_bot(chaves, pasta_destino):
     print("🚀 Iniciando (modo coordenadas)")
 
-    INPUT_X, INPUT_Y = 434, 405
-    BUSCAR_X, BUSCAR_Y = 870, 395
-    XML_X, XML_Y = 646, 369
+    INPUT_X, INPUT_Y = 501, 399
+    BUSCAR_X, BUSCAR_Y = 896, 409
+    XML_X, XML_Y = 630, 370
     qtd_sucesso = 0
     qtd_erro = 0
     chaves_erro = []
@@ -119,7 +118,6 @@ def rodar_bot(chaves, pasta_destino):
             time.sleep(5)
 
             mover_e_clicar(XML_X, XML_Y)
-            pyautogui.press("enter")
 
             print("⏳ Aguardando download...")
 
